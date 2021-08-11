@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
     <Folder Include="DataModels\DTOs\" />
     <Folder Include="DataModels\Repository\Mock\" />
   </ItemGroup>

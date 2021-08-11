@@ -1,5 +1,6 @@
 ﻿using EntityFrameworkCoreTesting.DataModels.Interfaces.IRepository;
 using EntityFrameworkCoreTesting.DataModels.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,13 @@ namespace EntityFrameworkCoreTesting.DataModels.Repository.Database
 {
     public class Test1Repository : ITest1Repository
     {
-        public IEnumerable<Test1> All => throw new NotImplementedException();
+        private readonly AppDbContext _appDbContext;
+        public Test1Repository(AppDbContext appDbContext)
+        {
+            _appDbContext = appDbContext;
+        }
+        public IEnumerable<Test1> All => _appDbContext.Test1s
+            .Include(t1 => t1.Test2s);
 
         public void Add(Test1 entity)
         {

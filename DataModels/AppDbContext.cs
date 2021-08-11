@@ -29,6 +29,9 @@ namespace EntityFrameworkCoreTesting.DataModels
                 .WithMany(t1 => t1.Test2s)
                 .OnDelete(DeleteBehavior.Cascade);
 
+            //if a column property accessor is private, EF Core needs to be informed of it, https://docs.microsoft.com/en-us/archive/msdn-magazine/2019/november/data-points-backing-field-and-owned-entity-changes-in-ef-core-3-0
+            //
+
             builder.Entity<Test1>()
                 .HasData(new List<Test1>()
                 {
