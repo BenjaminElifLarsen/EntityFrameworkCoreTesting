@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace EntityFrameworkCoreTesting.DataModels.Models
 {
-    public class Test2 : IDtoHandling<Test2DTO> //Domain-Driven Design
+    public class Test2 : IEntityHandlingDto<Test2DTO> //Domain-Driven Design
     {
         private Test2() //ctor for entityframework core
         {

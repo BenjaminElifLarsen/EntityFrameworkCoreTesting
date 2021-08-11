@@ -34,9 +34,18 @@ namespace EntityFrameworkCoreTesting.Controllers
             return Ok(_test1Repository.GetById(id).GenerateDTO);
         }
 
+        [HttpPost("Test1")]
+        public ActionResult AddTest1(Test1DTO dto)
+        {
+            if (dto.Id != 0)
+                return BadRequest("Id is set");
+            Test1 test1 = dto.GenerateEntity;
+            _test1Repository.Add(test1);
+            return Ok();
+        }
 
         [HttpPatch("Test1")]
-        public ActionResult AddTest1(Test1DTO dto)
+        public ActionResult PatchTest1(Test1DTO dto)
         {
             Test1 test1 = _test1Repository.GetById(dto.Id);
             if (test1 == null)
@@ -57,8 +66,21 @@ namespace EntityFrameworkCoreTesting.Controllers
         {
             return Ok(_test2Repository.GetById(id).GenerateDTO);
         }
-        [HttpPatch("Test2")]
+
+        [HttpPost("Test2")]
         public ActionResult AddTest2(Test2DTO dto)
+        {
+            if (string.IsNullOrEmpty(dto.Id))
+                return BadRequest("Id needs to be set");
+            if (_test2Repository.All.Any(t => t.Test2Id == dto.Id))
+                return BadRequest("Id is already in use");
+            Test2 test2 = dto.GenerateEntity;
+            _test2Repository.Add(test2);
+            return Ok();
+        }
+
+        [HttpPatch("Test2")]
+        public ActionResult PatchTest2(Test2DTO dto)
         {
             Test2 test2 = _test2Repository.GetById(dto.Id);
             if (test2 == null)

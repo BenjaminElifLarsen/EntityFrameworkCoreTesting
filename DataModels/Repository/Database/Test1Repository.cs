@@ -20,7 +20,8 @@ namespace EntityFrameworkCoreTesting.DataModels.Repository.Database
 
         public void Add(Test1 entity)
         {
-            throw new NotImplementedException();
+            _appDbContext.Test1s.Add(entity);
+            _appDbContext.SaveChanges();
         }
 
         public Test1 GetById(int id)

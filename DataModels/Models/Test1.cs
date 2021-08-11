@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace EntityFrameworkCoreTesting.DataModels.Models
 {
-    public class Test1 : IDtoHandling<Test1DTO> //Domain-Driven Design. Lookin also into Factory design.
+    public class Test1 : IEntityHandlingDto<Test1DTO> //Domain-Driven Design. Lookin also into Factory design.
     { //the models, in this project, will have no knowledge of the context or how to interact with it. That is for the repo design to handle. 
         private Test1() //private constructor for the context.
         {
@@ -20,6 +20,15 @@ namespace EntityFrameworkCoreTesting.DataModels.Models
             Test1Name = name;
             Test1Other = other;
             _test2s = new HashSet<Test2>();
+        }
+        public Test1(int id, string name, string other, HashSet<Test2> test2s)
+        { //public constructor for developers.
+            Test1Id = id;
+            Test1Name = name;
+            Test1Other = other;
+            if (test2s == null)
+                throw new ArgumentNullException(nameof(test2s));
+            _test2s = test2s;
         }
         private HashSet<Test2> _test2s;
         public int Test1Id { get; private set; }

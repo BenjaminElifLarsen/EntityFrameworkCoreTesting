@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace EntityFrameworkCoreTesting.DataModels.Interfaces
 {
-    public interface IDtoHandling <DtoType>
+    public interface IEntityHandlingDto <DtoType>
     {
         /// <summary>
         /// Generates a DTO out from the entity.
