@@ -29,6 +29,41 @@ namespace EntityFrameworkCoreTesting.DataModels
                 .WithMany(t1 => t1.Test2s)
                 .OnDelete(DeleteBehavior.Cascade);
 
+            builder.Entity<Test1>()
+                .HasData(new List<Test1>()
+                {
+                    new Test1(1,"Product","123"),
+                    new Test1(2,"Entity","Q"),
+                    new Test1(3,"Car","Wif"),
+                    new Test1(4,"Hope","Were"),
+                    new Test1(5,"Fear","Dash"),
+                    new Test1(6,"Bus","Crash"),
+                    new Test1(7,"EF Core","C Sharp"),
+                }
+            );
+
+            builder.Entity<Test2>()
+                .HasData(new List<Test2>()
+                {
+                    new Test2("T1-1",1),
+                    new Test2("T2-1",1),
+                    new Test2("T3-1",1),
+                    new Test2("T4-2",2),
+                    new Test2("T5-2",2),
+                    new Test2("T6-2",2),
+                    new Test2("T7-3",3),
+                    new Test2("T8-4",4),
+                    new Test2("T9-4",4),
+                    new Test2("T10-4",4),
+                    new Test2("T11-4",4),
+                    new Test2("T12-5",5),
+                    new Test2("T13-5",5),
+                    new Test2("T14-6",6),
+                    new Test2("T15-7",7),
+                    new Test2("T16-7",7),
+                }
+            );
+
         }
     }
 }
