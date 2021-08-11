@@ -14,6 +14,7 @@ namespace EntityFrameworkCoreTesting.DataModels.Models
 
         public Test1(int id, string name, string other)
         { //public constructor for developers.
+            Test1Id = id;
             Test1Name = name;
             Test1Other = other;
             _test2s = new HashSet<Test2>();
