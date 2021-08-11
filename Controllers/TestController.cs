@@ -71,6 +71,16 @@ namespace EntityFrameworkCoreTesting.Controllers
             return Ok();
         }
 
+        [HttpDelete("Test1/{id}")]
+        public ActionResult DeleteTest1(int id)
+        {
+            Test1 test = _test1Repository.GetById(id);
+            if (test == null)
+                return Ok();
+            _test1Repository.Remove(test);
+            return Ok();
+        }
+
         [HttpGet("Test2")]
         public ActionResult GetTest2()
         {
@@ -117,6 +127,16 @@ namespace EntityFrameworkCoreTesting.Controllers
                 return StatusCode(StatusCodes.Status404NotFound);
             test2.UpdateFromDTO(dto);
             _test2Repository.Update(test2);
+            return Ok();
+        }
+
+        [HttpDelete("Test2/{id}")]
+        public ActionResult DeleteTest2(string id)
+        {
+            Test2 test = _test2Repository.GetById(id);
+            if (test == null)
+                return Ok();
+            _test2Repository.Remove(test);
             return Ok();
         }
     }

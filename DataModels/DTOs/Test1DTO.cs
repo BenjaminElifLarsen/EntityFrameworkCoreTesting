@@ -11,6 +11,7 @@ namespace EntityFrameworkCoreTesting.DataModels.DTOs
 {
     public class Test1DTO : IDtoHandlingEntity<Test1>
     {
+
         public int Id { get; set; }
         public string Name { get; set; }
         public string Other { get; set; }

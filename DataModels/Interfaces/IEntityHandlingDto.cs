@@ -5,6 +5,10 @@ using System.Threading.Tasks;
 
 namespace EntityFrameworkCoreTesting.DataModels.Interfaces
 {
+    /// <summary>
+    /// Contains methods for working with DTOs via entities.
+    /// </summary>
+    /// <typeparam name="DtoType">The DTO</typeparam>
     public interface IEntityHandlingDto <DtoType>
     {
         /// <summary>
