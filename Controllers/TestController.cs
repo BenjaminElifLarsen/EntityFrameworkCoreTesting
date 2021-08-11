@@ -38,7 +38,7 @@ namespace EntityFrameworkCoreTesting.Controllers
         public ActionResult AddTest1(Test1DTO dto)
         {
             if (dto.Id != 0)
-                return BadRequest("Id is set");
+                return BadRequest("Id is not zero");
             Test1 test1 = dto.GenerateEntity;
             _test1Repository.Add(test1);
             return Ok();
