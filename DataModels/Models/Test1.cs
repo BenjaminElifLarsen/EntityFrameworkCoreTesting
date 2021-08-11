@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace EntityFrameworkCoreTesting.DataModels.Models
 {
     /// <summary>
-    /// Test class 1
+    /// The Test class 1
     /// </summary>
     public class Test1 : IEntityHandlingDto<Test1DTO> //Domain-Driven Design. Looki also into Factory design.
     { //the models, in this project, will have no knowledge of the context or how to interact with it. That is for the repo design to handle. 

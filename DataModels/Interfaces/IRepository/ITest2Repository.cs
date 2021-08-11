@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace EntityFrameworkCoreTesting.DataModels.Interfaces.IRepository
 {
+    /// <summary>
+    /// Interface for all Test2Repositories.
+    /// </summary>
     public interface ITest2Repository : IBasicRepository<Test2, string>
     {
     }

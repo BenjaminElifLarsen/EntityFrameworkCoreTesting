@@ -10,6 +10,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace EntityFrameworkCoreTesting.Controllers
 {
+    /// <summary>
+    /// The api controller.
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class TestController : ControllerBase
@@ -21,13 +24,20 @@ namespace EntityFrameworkCoreTesting.Controllers
             _test1Repository = test1Repository;
             _test2Repository = test2Repository;
         }
-
+        /// <summary>
+        /// Get all Test1 entities.
+        /// </summary>
+        /// <returns>All Test1 entities.</returns>
         [HttpGet("Test1")]
         public ActionResult GetTest1()
         {
             return Ok(_test1Repository.AllNoTracking.Select(t1 => t1.GenerateDTO));
         }
-
+        /// <summary>
+        /// Get a specific Test1 entity out form <paramref name="id"/>.
+        /// </summary>
+        /// <param name="id">The id of the entity.</param>
+        /// <returns>If found, Ok statuscode with the entity. Else statuscode NotFound.</returns>
         [HttpGet("Test1/{id}")]
         public ActionResult GetTest1(int id)
         {
@@ -36,7 +46,11 @@ namespace EntityFrameworkCoreTesting.Controllers
                 return StatusCode(StatusCodes.Status404NotFound);
             return Ok(test.GenerateDTO);
         }
-
+        /// <summary>
+        /// Add a new entity to the context out from the information in <paramref name="dto"/>.
+        /// </summary>
+        /// <param name="dto">The dto with the entity information to add.</param>
+        /// <returns>BadRequest if the Id is not 0 or if one or more Test2 ids are in use. Else Ok statuscode.</returns>
         [HttpPost("Test1")]
         public ActionResult AddTest1(Test1DTO dto)
         {
@@ -48,7 +62,11 @@ namespace EntityFrameworkCoreTesting.Controllers
             _test1Repository.Add(test1);
             return Ok();
         }
-
+        /// <summary>
+        /// Update an entity with the information in <paramref name="dto"/>
+        /// </summary>
+        /// <param name="dto">The dto with the update information.</param>
+        /// <returns>NotFound if the id in dto did not match an entity, else Ok</returns>
         [HttpPut("Test1")]
         public ActionResult PutTest1(Test1DTO dto)
         {
@@ -59,9 +77,13 @@ namespace EntityFrameworkCoreTesting.Controllers
             _test1Repository.Update(test);
             return Ok();
         }
-
+        /// <summary>
+        /// Patch an entity with the information in <paramref name="dto"/>
+        /// </summary>
+        /// <param name="dto">The dto with the patch information.</param>
+        /// <returns>NotFound if the id in dto did not match an entity, else Ok</returns>
         [HttpPatch("Test1")]
-        public ActionResult PatchTest1(Test1DTO dto)
+        public ActionResult PatchTest1(Test1DTO dto) //this is just the same as the update method...
         {
             Test1 test1 = _test1Repository.GetById(dto.Id);
             if (test1 == null)
@@ -70,7 +92,11 @@ namespace EntityFrameworkCoreTesting.Controllers
             _test1Repository.Update(test1);
             return Ok();
         }
-
+        /// <summary>
+        /// Deletes an entity with the given <paramref name="id"/>.
+        /// </summary>
+        /// <param name="id">The id of the entity to delete.</param>
+        /// <returns>Ok statuscode.</returns>
         [HttpDelete("Test1/{id}")]
         public ActionResult DeleteTest1(int id)
         {

@@ -9,16 +9,36 @@ using System.Threading.Tasks;
 
 namespace EntityFrameworkCoreTesting.DataModels.DTOs
 {
+    /// <summary>
+    /// The DTO for Test1
+    /// </summary>
     public class Test1DTO : IDtoHandlingEntity<Test1>
     {
-
+        /// <summary>
+        /// The id.
+        /// </summary>
         public int Id { get; set; }
+        /// <summary>
+        /// The name.
+        /// </summary>
         public string Name { get; set; }
+        /// <summary>
+        /// Other stuff.
+        /// </summary>
         public string Other { get; set; }
+        /// <summary>
+        /// List of foreignkeys pointing to it.
+        /// </summary>
         public List<Test2> Test2s { get; set; }
 
+        /// <summary>
+        /// Foreignkey class.
+        /// </summary>
         public class Test2
         {
+            /// <summary>
+            /// The id.
+            /// </summary>
             public string Id { get; set; }
         }
 

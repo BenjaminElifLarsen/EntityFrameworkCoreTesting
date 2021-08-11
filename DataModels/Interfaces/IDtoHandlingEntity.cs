@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace EntityFrameworkCoreTesting.DataModels.Interfaces
@@ -14,6 +15,7 @@ namespace EntityFrameworkCoreTesting.DataModels.Interfaces
         /// <summary>
         /// Generates an entity out from the DTO.
         /// </summary>
+        [JsonIgnore]
         public ModelType GenerateEntity { get; }
     }
 }

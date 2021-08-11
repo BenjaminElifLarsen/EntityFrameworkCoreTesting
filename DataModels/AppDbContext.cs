@@ -7,14 +7,22 @@ using System.Threading.Tasks;
 
 namespace EntityFrameworkCoreTesting.DataModels
 {
+    /// <summary>
+    /// The app database context class. 
+    /// </summary>
     public class AppDbContext : DbContext
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
 
         }
-
+        /// <summary>
+        /// Database set for Test1.
+        /// </summary>
         public DbSet<Test1> Test1s { get; set; }
+        /// <summary>
+        /// Database set for Test2.
+        /// </summary>
         public DbSet<Test2> Test2s { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
