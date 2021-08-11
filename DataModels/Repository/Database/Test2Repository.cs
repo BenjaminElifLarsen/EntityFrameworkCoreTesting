@@ -1,5 +1,6 @@
 ﻿using EntityFrameworkCoreTesting.DataModels.Interfaces.IRepository;
 using EntityFrameworkCoreTesting.DataModels.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,8 @@ namespace EntityFrameworkCoreTesting.DataModels.Repository.Database
         }
         public IEnumerable<Test2> All => _appDbContext.Test2s;
 
+        public IEnumerable<Test2> AllNoTracking => _appDbContext.Test2s.AsNoTracking();
+
         public void Add(Test2 entity)
         {
             _appDbContext.Test2s.Add(entity);
@@ -27,9 +30,15 @@ namespace EntityFrameworkCoreTesting.DataModels.Repository.Database
             return _appDbContext.Test2s.FirstOrDefault(t => t.Test2Id == id);
         }
 
+        public Test2 GetByIdNoTracking(string id)
+        {
+            return _appDbContext.Test2s.AsNoTracking().FirstOrDefault(t => t.Test2Id == id);
+        }
+
         public void Remove(Test2 entity)
         {
-            throw new NotImplementedException();
+            _appDbContext.Test2s.Remove(entity);
+            _appDbContext.SaveChanges();
         }
 
         public void Update(Test2 entity)

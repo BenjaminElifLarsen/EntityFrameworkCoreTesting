@@ -11,7 +11,8 @@ namespace EntityFrameworkCoreTesting.DataModels.Interfaces
         public void Add(ModelType entity);
         public void Remove(ModelType entity);
         public IEnumerable<ModelType> All { get; }
-        public ModelType GetById(ModelId id); 
-
+        public IEnumerable<ModelType> AllNoTracking { get; }
+        public ModelType GetById(ModelId id);
+        public ModelType GetByIdNoTracking(ModelId id);
     }
 }

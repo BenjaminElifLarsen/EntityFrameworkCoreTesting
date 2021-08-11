@@ -18,6 +18,10 @@ namespace EntityFrameworkCoreTesting.DataModels.Repository.Database
         public IEnumerable<Test1> All => _appDbContext.Test1s
             .Include(t1 => t1.Test2s);
 
+        public IEnumerable<Test1> AllNoTracking => _appDbContext.Test1s
+            .Include(t1 => t1.Test2s)
+            .AsNoTracking();
+
         public void Add(Test1 entity)
         {
             _appDbContext.Test1s.Add(entity);
@@ -31,9 +35,18 @@ namespace EntityFrameworkCoreTesting.DataModels.Repository.Database
                 .FirstOrDefault(t => t.Test1Id == id);
         }
 
+        public Test1 GetByIdNoTracking(int id)
+        {
+            return _appDbContext.Test1s
+                .Include(t => t.Test2s)
+                .AsNoTracking()
+                .FirstOrDefault(t => t.Test1Id == id);
+        }
+
         public void Remove(Test1 entity)
         {
-            throw new NotImplementedException();
+            _appDbContext.Test1s.Remove(entity);
+            _appDbContext.SaveChanges();
         }
 
         public void Update(Test1 entity)

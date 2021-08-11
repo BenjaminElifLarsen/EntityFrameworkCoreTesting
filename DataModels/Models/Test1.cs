@@ -57,7 +57,7 @@ namespace EntityFrameworkCoreTesting.DataModels.Models
             if (!string.IsNullOrWhiteSpace(dto.Other) && dto.Other != Test1Other)
                 Test1Other = dto.Other;
             if (dto.Test2s != null)
-                _test2s = dto.Test2s.Select(t => new Test2(t.Id, dto.Id)).ToHashSet();
+                _test2s = dto.Test2s.Select(t => new Test2(t.Id)).ToHashSet();
         }
     }
 }

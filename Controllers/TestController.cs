@@ -25,15 +25,15 @@ namespace EntityFrameworkCoreTesting.Controllers
         [HttpGet("Test1")]
         public ActionResult GetTest1()
         {
-            return Ok(_test1Repository.All.Select(t1 => t1.GenerateDTO));
+            return Ok(_test1Repository.AllNoTracking.Select(t1 => t1.GenerateDTO));
         }
 
         [HttpGet("Test1/{id}")]
         public ActionResult GetTest1(int id)
         {
-            Test1 test = _test1Repository.GetById(id);
+            Test1 test = _test1Repository.GetByIdNoTracking(id);
             if (test == null)
-                return BadRequest();
+                return StatusCode(StatusCodes.Status404NotFound);
             return Ok(test.GenerateDTO);
         }
 
@@ -49,12 +49,14 @@ namespace EntityFrameworkCoreTesting.Controllers
             return Ok();
         }
 
-        [HttpPut]
+        [HttpPut("Test1")]
         public ActionResult PutTest1(Test1DTO dto)
         {
+            Test1 test = _test1Repository.GetById(dto.Id);
             if (_test1Repository.GetById(dto.Id) == null)
-                return BadRequest();
-            _test1Repository.Update(dto.GenerateEntity);
+                return StatusCode(StatusCodes.Status404NotFound);
+            test.UpdateFromDTO(dto);
+            _test1Repository.Update(test);
             return Ok();
         }
 
@@ -72,15 +74,15 @@ namespace EntityFrameworkCoreTesting.Controllers
         [HttpGet("Test2")]
         public ActionResult GetTest2()
         {
-            return Ok(_test2Repository.All.Select(t2 => t2.GenerateDTO));
+            return Ok(_test2Repository.AllNoTracking.Select(t2 => t2.GenerateDTO));
         }
 
         [HttpGet("Test2/{id}")]
         public ActionResult GetTest2(string id)
         {
-            Test2 test = _test2Repository.GetById(id);
+            Test2 test = _test2Repository.GetByIdNoTracking(id);
             if (test == null)
-                return BadRequest();
+                return StatusCode(StatusCodes.Status404NotFound);
             return Ok(test.GenerateDTO);
         }
 
@@ -96,12 +98,14 @@ namespace EntityFrameworkCoreTesting.Controllers
             return Ok();
         }
 
-        [HttpPut]
+        [HttpPut("Test2")]
         public ActionResult PutTest2(Test2DTO dto)
         {
-            if (_test2Repository.GetById(dto.Id) == null)
-                return BadRequest();
-            _test2Repository.Update(dto.GenerateEntity);
+            Test2 test = _test2Repository.GetById(dto.Id);
+            if (test == null)
+                return StatusCode(StatusCodes.Status404NotFound);
+            test.UpdateFromDTO(dto);
+            _test2Repository.Update(test);
             return Ok();
         }
 

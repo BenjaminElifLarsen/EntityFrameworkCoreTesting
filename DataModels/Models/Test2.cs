@@ -27,10 +27,16 @@ namespace EntityFrameworkCoreTesting.DataModels.Models
         { //developer ctor
             if (string.IsNullOrWhiteSpace(id))
                 throw new ArgumentNullException(nameof(id));
-            //if (test1Id == 0)
-            //    throw new ArgumentNullException(nameof(test1Id));
+            if (test1Id == 0)
+                throw new ArgumentNullException(nameof(test1Id));
             Test2Id = id;
             Test1Id = test1Id;
+        }
+
+        public Test2(string id)
+        { //developer ctor
+            if (string.IsNullOrWhiteSpace(id))
+                throw new ArgumentNullException(nameof(id));
         }
 
         public string Test2Id { get; private set; } //could make sense to allow updating a string id, but would need to check if it is in use or not. Would only make real sense in case of composite keys
