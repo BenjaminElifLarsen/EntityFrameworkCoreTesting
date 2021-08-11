@@ -43,7 +43,12 @@ namespace EntityFrameworkCoreTesting.DataModels.Models
 
         public void UpdateFromDTO(Test1DTO dto)
         {
-            throw new NotImplementedException();
+            if (!string.IsNullOrWhiteSpace(dto.Name) && dto.Name != Test1Name)
+                Test1Name = dto.Name;
+            if (!string.IsNullOrWhiteSpace(dto.Other) && dto.Other != Test1Other)
+                Test1Other = dto.Other;
+            if (dto.Test2s != null)
+                _test2s = dto.Test2s.Select(t => new Test2(t.Id, dto.Id)).ToHashSet();
         }
     }
 }

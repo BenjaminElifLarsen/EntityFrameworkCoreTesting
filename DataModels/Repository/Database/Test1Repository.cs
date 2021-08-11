@@ -25,7 +25,9 @@ namespace EntityFrameworkCoreTesting.DataModels.Repository.Database
 
         public Test1 GetById(int id)
         {
-            throw new NotImplementedException();
+            return _appDbContext.Test1s
+                .Include(t => t.Test2s)
+                .FirstOrDefault(t => t.Test1Id == id);
         }
 
         public void Remove(Test1 entity)
@@ -35,7 +37,8 @@ namespace EntityFrameworkCoreTesting.DataModels.Repository.Database
 
         public void Update(Test1 entity)
         {
-            throw new NotImplementedException();
+            _appDbContext.Test1s.Update(entity);
+            _appDbContext.SaveChanges();
         }
     }
 }

@@ -37,13 +37,17 @@ namespace EntityFrameworkCoreTesting.DataModels.Models
         public int Test1Id { get; private set; }
         public Test1 Test1 { get; private set; }
 
-        public Test2DTO GenerateDTO => throw new NotImplementedException();
+        public Test2DTO GenerateDTO => new Test2DTO 
+        {
+            Id = Test2Id,
+            Test1Id = Test1Id,
+        };
 
         public void UpdateTest1(Test1 newTest1) { Test1Id = newTest1.Test1Id; Test1 = newTest1; }
 
         public void UpdateFromDTO(Test2DTO dto)
         {
-            throw new NotImplementedException();
+            Test1Id = dto.Test1Id;
         }
     }
 }
