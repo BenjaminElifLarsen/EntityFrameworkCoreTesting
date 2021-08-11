@@ -1,11 +1,13 @@
-﻿using System;
+﻿using EntityFrameworkCoreTesting.DataModels.DTOs;
+using EntityFrameworkCoreTesting.DataModels.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace EntityFrameworkCoreTesting.DataModels.Models
 {
-    public class Test2 //Domain-Driven Design
+    public class Test2 : IDtoHandling<Test2DTO> //Domain-Driven Design
     {
         private Test2() //ctor for entityframework core
         {
@@ -35,6 +37,13 @@ namespace EntityFrameworkCoreTesting.DataModels.Models
         public int Test1Id { get; private set; }
         public Test1 Test1 { get; private set; }
 
+        public Test2DTO GenerateDTO => throw new NotImplementedException();
+
         public void UpdateTest1(Test1 newTest1) { Test1Id = newTest1.Test1Id; Test1 = newTest1; }
+
+        public void UpdateFromDTO(Test2DTO dto)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

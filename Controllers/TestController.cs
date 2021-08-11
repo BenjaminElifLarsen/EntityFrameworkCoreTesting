@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using EntityFrameworkCoreTesting.DataModels.DTOs;
 using EntityFrameworkCoreTesting.DataModels.Interfaces.IRepository;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -23,13 +24,13 @@ namespace EntityFrameworkCoreTesting.Controllers
         [HttpGet("Get")]
         public ActionResult Get()
         {
-            return Ok(_test1Repository.All);
+            return Ok(_test1Repository.All.Select(t1 => t1.GenerateDTO));
         }
 
         [HttpGet("Get/{id}")]
         public ActionResult Get(int id)
         {
-            return Ok(_test1Repository.GetById(id));
+            return Ok(_test1Repository.GetById(id).GenerateDTO);
         }
     }
 }

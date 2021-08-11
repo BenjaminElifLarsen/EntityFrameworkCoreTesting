@@ -1,11 +1,13 @@
-﻿using System;
+﻿using EntityFrameworkCoreTesting.DataModels.DTOs;
+using EntityFrameworkCoreTesting.DataModels.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace EntityFrameworkCoreTesting.DataModels.Models
 {
-    public class Test1 //Domain-Driven Design. Lookin also into Factory design.
+    public class Test1 : IDtoHandling<Test1DTO> //Domain-Driven Design. Lookin also into Factory design.
     { //the models, in this project, will have no knowledge of the context or how to interact with it. That is for the repo design to handle. 
         private Test1() //private constructor for the context.
         {
@@ -24,11 +26,24 @@ namespace EntityFrameworkCoreTesting.DataModels.Models
         public string Test1Name { get; private set; }
         public string Test1Other { get; private set; }
         public IEnumerable<Test2> Test2s { get { return _test2s; } private set { _test2s = value.ToHashSet(); } }
-        
+
+        public Test1DTO GenerateDTO => new Test1DTO
+        {
+            Id = Test1Id,
+            Other = Test1Other,
+            Name = Test1Name,
+            Test2s = _test2s.Select(t => new Test1DTO.Test2 { Id = t.Test2Id }).ToList(),
+        };
+
         public void UpdateName(string newName) { Test1Name = newName; }
         public void UpdateOther(string newOther) { Test1Other = newOther; }
         public void AddTest2(Test2 test2) { _test2s.Add(test2); }
         public void RemoveTest2(Test2 test2) { _test2s.Remove(test2); }
         public Test2 GetTest2ViaId(string id) { return _test2s.FirstOrDefault(t => t.Test2Id == id); }
+
+        public void UpdateFromDTO(Test1DTO dto)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
