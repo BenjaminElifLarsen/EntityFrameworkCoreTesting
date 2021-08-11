@@ -31,7 +31,10 @@ namespace EntityFrameworkCoreTesting.Controllers
         [HttpGet("Test1/{id}")]
         public ActionResult GetTest1(int id)
         {
-            return Ok(_test1Repository.GetById(id).GenerateDTO);
+            Test1 test = _test1Repository.GetById(id);
+            if (test == null)
+                return BadRequest();
+            return Ok(test.GenerateDTO);
         }
 
         [HttpPost("Test1")]
@@ -40,7 +43,18 @@ namespace EntityFrameworkCoreTesting.Controllers
             if (dto.Id != 0)
                 return BadRequest("Id is not zero");
             Test1 test1 = dto.GenerateEntity;
+            if (_test2Repository.All.Any(t => test1.Test2s.Any(tt => t.Test2Id == tt.Test2Id)))
+                return BadRequest("One or more Test2 ids are in use");
             _test1Repository.Add(test1);
+            return Ok();
+        }
+
+        [HttpPut]
+        public ActionResult PutTest1(Test1DTO dto)
+        {
+            if (_test1Repository.GetById(dto.Id) == null)
+                return BadRequest();
+            _test1Repository.Update(dto.GenerateEntity);
             return Ok();
         }
 
@@ -64,7 +78,10 @@ namespace EntityFrameworkCoreTesting.Controllers
         [HttpGet("Test2/{id}")]
         public ActionResult GetTest2(string id)
         {
-            return Ok(_test2Repository.GetById(id).GenerateDTO);
+            Test2 test = _test2Repository.GetById(id);
+            if (test == null)
+                return BadRequest();
+            return Ok(test.GenerateDTO);
         }
 
         [HttpPost("Test2")]
@@ -76,6 +93,15 @@ namespace EntityFrameworkCoreTesting.Controllers
                 return BadRequest("Id is already in use");
             Test2 test2 = dto.GenerateEntity;
             _test2Repository.Add(test2);
+            return Ok();
+        }
+
+        [HttpPut]
+        public ActionResult PutTest2(Test2DTO dto)
+        {
+            if (_test2Repository.GetById(dto.Id) == null)
+                return BadRequest();
+            _test2Repository.Update(dto.GenerateEntity);
             return Ok();
         }
 

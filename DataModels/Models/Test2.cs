@@ -27,8 +27,8 @@ namespace EntityFrameworkCoreTesting.DataModels.Models
         { //developer ctor
             if (string.IsNullOrWhiteSpace(id))
                 throw new ArgumentNullException(nameof(id));
-            if (test1Id == 0)
-                throw new ArgumentNullException(nameof(test1Id));
+            //if (test1Id == 0)
+            //    throw new ArgumentNullException(nameof(test1Id));
             Test2Id = id;
             Test1Id = test1Id;
         }

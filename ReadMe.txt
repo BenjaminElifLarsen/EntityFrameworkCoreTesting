@@ -6,3 +6,7 @@ The project is also meant to learn domain-driven design (DDD) and how it can be 
 
 Regarding the behaviour and collection, if an old entity is not present in the new collection, and the foreign key is not allowed to be null, it will be deleted in the context.
 
+Learned that Json will read all getters, so need to use JsonIgnore on getters that should not be sterialised. 
+
+
+
