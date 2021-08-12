@@ -1,0 +1,17 @@
+Notes for factory design and factory method design
+
+Factory design:
+A single class creates instaces of a specific class out from given information, e.g. a string. If more classes needs to be added to the factory class, the class needs to be updated. This violates the open/closed design principle.
+A solution to the violation could be the use of Activator.CreateInstance(Type, Object) in C Sharp. Open/Close is to extend, not modify code, so inheritance of a superclass rather than modifying the class.  
+
+Factory method design;
+The superclass contains the abstract method for creating, while the subclasses contain the actually implementation. Each subclass would return a result of their type rather than the superclass. 
+Thus there exist a abstract superclass for the factory. Each class that should be created instances off needs a factoryclass that inherits from the factory superclasss. Each product should inhierit from a product superclass.
+The superclass should contain a method and a getter. The method returns the product instance and the return type should be the product superclass, like Public Product CreateProduct(). The getter, which also can be a method, should be abstract in the superclass and each subfactory should overwrite to fit the creation of the factory's product. The getter should return the product superclass. 
+
+Notes:
+Factory method design seems to be more my thing. 
+These factory designs might be useful on a non-api webpage, but they could maybe be used on webpages where people can enter information which depends on multiple classes.
+Not sure how useful these designs are in relationship to databases, since each class would be a model and this would create problems with foreignkey relationships. 
+However, if a single class is used for the table with the information that makes up all subproduct classes, the table information could be used to create the products, but it might be more work than gain or usefulness. But if a subproduct class contains specific information that is not stored in the table, this would not work.
+
