@@ -103,13 +103,20 @@ namespace EntityFrameworkCoreTesting.Controllers
             _test1Repository.Remove(test);
             return Ok();
         }
-
+        /// <summary>
+        /// Get all Test2 entities.
+        /// </summary>
+        /// <returns>All Test2 entities.</returns>
         [HttpGet("Test2")]
         public ActionResult GetTest2()
         {
             return Ok(_test2Repository.AllNoTracking.Select(t2 => t2.GenerateDTO));
         }
-
+        /// <summary>
+        /// Get a specific Test2 entity out form <paramref name="id"/>.
+        /// </summary>
+        /// <param name="id">The id of the entity.</param>
+        /// <returns>If found, Ok statuscode with the entity. Else statuscode NotFound.</returns>
         [HttpGet("Test2/{id}")]
         public ActionResult GetTest2(string id)
         {
@@ -118,7 +125,11 @@ namespace EntityFrameworkCoreTesting.Controllers
                 return StatusCode(StatusCodes.Status404NotFound);
             return Ok(test.GenerateDTO);
         }
-
+        /// <summary>
+        /// Add a new entity to the context out from the information in <paramref name="dto"/>.
+        /// </summary>
+        /// <param name="dto">The dto with the entity information to add.</param>
+        /// <returns>BadRequest if the Id is not 0 or if one or more Test2 ids are in use. Else Ok statuscode.</returns>
         [HttpPost("Test2")]
         public ActionResult AddTest2(Test2DTO dto)
         {
@@ -130,7 +141,11 @@ namespace EntityFrameworkCoreTesting.Controllers
             _test2Repository.Add(test2);
             return Ok();
         }
-
+        /// <summary>
+        /// Update an entity with the information in <paramref name="dto"/>
+        /// </summary>
+        /// <param name="dto">The dto with the update information.</param>
+        /// <returns>NotFound if the id in dto did not match an entity, else Ok</returns>
         [HttpPut("Test2")]
         public ActionResult PutTest2(Test2DTO dto)
         {
@@ -141,7 +156,11 @@ namespace EntityFrameworkCoreTesting.Controllers
             _test2Repository.Update(test);
             return Ok();
         }
-
+        /// <summary>
+        /// Patch an entity with the information in <paramref name="dto"/>
+        /// </summary>
+        /// <param name="dto">The dto with the patch information.</param>
+        /// <returns>NotFound if the id in dto did not match an entity, else Ok</returns>
         [HttpPatch("Test2")]
         public ActionResult PatchTest2(Test2DTO dto)
         {
@@ -152,7 +171,11 @@ namespace EntityFrameworkCoreTesting.Controllers
             _test2Repository.Update(test2);
             return Ok();
         }
-
+        /// <summary>
+        /// Deletes an entity with the given <paramref name="id"/>.
+        /// </summary>
+        /// <param name="id">The id of the entity to delete.</param>
+        /// <returns>Ok statuscode.</returns>
         [HttpDelete("Test2/{id}")]
         public ActionResult DeleteTest2(string id)
         {
