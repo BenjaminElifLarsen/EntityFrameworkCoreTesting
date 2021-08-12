@@ -2,7 +2,7 @@ Notes for factory design and factory method design
 
 Factory design:
 A single class creates instaces of a specific class out from given information, e.g. a string. If more classes needs to be added to the factory class, the class needs to be updated. This violates the open/closed design principle.
-A solution to the violation could be the use of Activator.CreateInstance(Type, Object) in C Sharp. Open/Close is to extend, not modify code, so inheritance of a superclass rather than modifying the class.  
+A solution to the violation could be the use of Activator.CreateInstance(Type, Object) in C Sharp. Open/Close is to extend, not modify code, so inheritance of a superclass rather than modifying the class. Interfaces can also be used and are better to use than a superclass. 
 
 Factory method design;
 The superclass contains the abstract method for creating, while the subclasses contain the actually implementation. Each subclass would return a result of their type rather than the superclass. 
