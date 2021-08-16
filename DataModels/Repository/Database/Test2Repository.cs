@@ -27,12 +27,12 @@ namespace EntityFrameworkCoreTesting.DataModels.Repository.Database
 
         public Test2 GetById(string id)
         {
-            return _appDbContext.Test2s.FirstOrDefault(t => t.Test2Id == id);
+            return _appDbContext.Test2s.Include(t => t.Test1).FirstOrDefault(t => t.Test2Id == id);
         }
 
         public Test2 GetByIdNoTracking(string id)
         {
-            return _appDbContext.Test2s.AsNoTracking().FirstOrDefault(t => t.Test2Id == id);
+            return _appDbContext.Test2s.Include(t => t.Test1).AsNoTracking().FirstOrDefault(t => t.Test2Id == id);
         }
 
         public void Remove(Test2 entity)

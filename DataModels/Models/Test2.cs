@@ -78,6 +78,12 @@ namespace EntityFrameworkCoreTesting.DataModels.Models
             Test1Id = Test1Id,
         };
 
+        public void UpdateTest1(int id)
+        {
+            Test1Id = id;
+            Test1 = null;
+        }
+
         /// <summary>
         /// Update which foreignkey entity this entity points too.
         /// </summary>
@@ -86,7 +92,7 @@ namespace EntityFrameworkCoreTesting.DataModels.Models
 
         public void UpdateFromDTO(Test2DTO dto)
         {
-            Test1Id = dto.Test1Id;
+            UpdateTest1(dto.Test1Id);
         }
     }
 }
