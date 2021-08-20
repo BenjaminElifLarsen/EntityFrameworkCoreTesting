@@ -8,5 +8,6 @@ Regarding the behaviour and collection, if an old entity is not present in the n
 
 Learned that Json will read all getters, so need to use JsonIgnore on getters that should not be sterialised. 
 
+ModelBinder cannot bind to private setters in the DTOs when an endpoint is called. 
 
 
